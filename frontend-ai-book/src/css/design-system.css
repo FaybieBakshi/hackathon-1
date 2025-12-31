@@ -1,0 +1,66 @@
+/**
+ * Enhanced Design System for AI/Robotics Theme
+ */
+
+ :root {
+  /* Modern color palette */
+  --ifm-color-primary: #00c2ff;
+  --ifm-color-primary-dark: #00a8e0;
+  --ifm-color-primary-darker: #0098cc;
+  --ifm-color-primary-darkest: #007aa3;
+  --ifm-color-primary-light: #1ac8ff;
+  --ifm-color-primary-lighter: #33ceff;
+  --ifm-color-primary-lightest: #66dbff;
+  
+  --ifm-color-secondary: #667eea;
+  --ifm-color-secondary-dark: #5a6fd7;
+  --ifm-color-secondary-darker: #4f62c4;
+  --ifm-color-secondary-darkest: #3d4ca3;
+  --ifm-color-secondary-light: #8092ed;
+  --ifm-color-secondary-lighter: #99a6f0;
+  --ifm-color-secondary-lightest: #b3bcf3;
+  
+  --ifm-color-accent: #764ba2;
+  --ifm-color-accent-dark: #684190;
+  --ifm-color-accent-darker: #5a377e;
+  --ifm-color-accent-darkest: #4c2e6c;
+  --ifm-color-accent-light: #8565b0;
+  --ifm-color-accent-lighter: #957fbe;
+  --ifm-color-accent-lightest: #a599cc;
+  
+  /* Success/Error/Warning with AI theme */
+  --ifm-color-success: #00ff9d;
+  --ifm-color-error: #ff3e71;
+  --ifm-color-warning: #ffd166;
+  --ifm-color-info: #00f2fe;
+  
+  /* Enhanced spacing */
+  --ifm-spacing-horizontal: 1.5rem;
+  --ifm-spacing-vertical: 2rem;
+  
+  /* Modern border radius */
+  --ifm-border-radius: 8px;
+  --ifm-border-radius-lg: 12px;
+  --ifm-border-radius-xl: 16px;
+}
+
+[data-theme='dark'] {
+  /* Dark mode specific colors */
+  --ifm-color-primary: #00f2fe;
+  --ifm-color-primary-dark: #00d8e4;
+  --ifm-color-primary-darker: #00beca;
+  --ifm-color-primary-darkest: #00a4b0;
+  
+  --ifm-color-secondary: #f093fb;
+  --ifm-color-secondary-dark: #e279ed;
+  --ifm-color-secondary-darker: #d45fdf;
+  --ifm-color-secondary-darkest: #c645d1;
+  
+  --ifm-background-color: #0a0a14;
+  --ifm-background-surface-color: #121220;
+  
+  /* Enhanced contrast for accessibility */
+  --ifm-color-emphasis-900: #ffffff;
+  --ifm-color-emphasis-800: #e0e0ff;
+  --ifm-color-emphasis-700: #c0c0ff;
+}

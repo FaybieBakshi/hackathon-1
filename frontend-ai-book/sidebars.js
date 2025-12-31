@@ -27,6 +27,46 @@ const sidebars = {
         'module-1/chapter-3-urdf-modeling',
       ],
     },
+    {
+      type: 'category',
+      label: 'Module 2: The Digital Twin (Gazebo & Unity)',
+      items: [
+        'module-2/index',
+        'module-2/chapter-1-gazebo-fundamentals/index',
+        'module-2/chapter-1-gazebo-fundamentals/physics-concepts',
+        'module-2/chapter-1-gazebo-fundamentals/simulation-env',
+        'module-2/chapter-1-gazebo-fundamentals/practical-exercises',
+        'module-2/chapter-2-unity-rendering/index',
+        'module-2/chapter-2-unity-rendering/visual-rendering',
+        'module-2/chapter-2-unity-rendering/unity-integration',
+        'module-2/chapter-2-unity-rendering/interaction-design',
+        'module-2/chapter-3-sensor-simulation/index',
+        'module-2/chapter-3-sensor-simulation/lidar-simulation',
+        'module-2/chapter-3-sensor-simulation/depth-camera-sim',
+        'module-2/chapter-3-sensor-simulation/imu-simulation',
+        'module-2/chapter-3-sensor-simulation/sensor-fusion',
+      ],
+    },
+    {
+      type: 'category',
+      label: 'Module 3: The AI-Robot Brain (NVIDIA Isaac)',
+      items: [
+        'module-3/index',
+        'module-3/isaac-sim-synthetic-data',
+        'module-3/isaac-ros-vslam',
+        'module-3/nav2-bipedal-planning',
+      ],
+    },
+    {
+      type: 'category',
+      label: 'Module 4: Vision-Language-Action (VLA)',
+      items: [
+        'module-4/index',
+        'module-4/voice-to-action',
+        'module-4/cognitive-planning',
+        'module-4/capstone-project',
+      ],
+    },
   ],
 
   // But you can create a sidebar manually

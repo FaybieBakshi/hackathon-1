@@ -1,0 +1,451 @@
+/**
+ * Modern AI/Robotics Theme for Frontend-AI-Book
+ * Enhanced with gradient aesthetics, modern components, and AI visual language
+ */
+
+/* Import the design system */
+@import 'design-system.css';
+
+/* Import component-specific styles */
+@import 'components.css';
+
+/* Modern CSS Reset & Base Styles */
+:root {
+  /* Enhanced color system */
+  --ifm-color-ai-blue: var(--ifm-color-primary);
+  --ifm-color-robotic-purple: var(--ifm-color-accent);
+  --ifm-color-neon-cyan: #00f2fe;
+  --ifm-color-matrix-green: #00ff9d;
+  --ifm-color-circuit-orange: #ff6b00;
+  
+  /* Modern gradients */
+  --gradient-ai-primary: linear-gradient(135deg, var(--ifm-color-primary) 0%, var(--ifm-color-accent) 100%);
+  --gradient-cyber: linear-gradient(135deg, #00f2fe 0%, #4facfe 100%);
+  --gradient-neural: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  --gradient-robotic: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+  --gradient-dark-ui: linear-gradient(135deg, #141e30 0%, #243b55 100%);
+  
+  /* Enhanced shadows and effects */
+  --shadow-soft: 0 4px 14px 0 rgba(0, 0, 0, 0.1);
+  --shadow-medium: 0 6px 20px rgba(0, 0, 0, 0.15);
+  --shadow-glow: 0 0 20px rgba(0, 242, 254, 0.3);
+  --shadow-glow-green: 0 0 20px rgba(0, 255, 157, 0.3);
+  
+  /* Modern borders */
+  --border-glow: 1px solid rgba(0, 242, 254, 0.3);
+  --border-dashed-tech: 2px dashed rgba(255, 255, 255, 0.2);
+  --border-circuit: 1px solid rgba(255, 107, 0, 0.4);
+  
+  /* Modern typography */
+  --ifm-font-family-base: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+  --ifm-font-family-monospace: 'JetBrains Mono', 'Fira Code', Consolas, Monaco, 'Andale Mono', monospace;
+  --ifm-heading-font-family: var(--ifm-font-family-base);
+  
+  /* Spacing system */
+  --spacing-unit: 0.25rem;
+  --container-max-width: 1440px;
+  
+  /* Animation timings */
+  --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-normal: 300ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: 500ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Dark theme enhancements */
+[data-theme='dark'] {
+  --gradient-dark-ui: linear-gradient(135deg, #0f2027 0%, #203a43 100%);
+  --shadow-glow: 0 0 25px rgba(0, 242, 254, 0.4);
+  --border-glow: 1px solid rgba(0, 242, 254, 0.5);
+  
+  /* Enhanced code highlighting */
+  --docusaurus-highlighted-code-line-bg: rgba(0, 242, 254, 0.15);
+  
+  /* Dark mode data visualization */
+  --color-data-line: var(--ifm-color-neon-cyan);
+  --color-data-point: var(--ifm-color-matrix-green);
+}
+
+/* Modern Hero Section */
+.hero--primary {
+  background: var(--gradient-dark-ui);
+  position: relative;
+  overflow: hidden;
+}
+
+.hero--primary::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: 
+    radial-gradient(circle at 20% 50%, rgba(0, 242, 254, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(255, 107, 0, 0.08) 0%, transparent 50%);
+  animation: pulse 20s ease-in-out infinite alternate;
+}
+
+.hero__title {
+  background: var(--gradient-cyber);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  font-weight: 800;
+  font-size: 3.5rem;
+  letter-spacing: -0.025em;
+  margin-bottom: 1rem;
+  position: relative;
+}
+
+.hero__subtitle {
+  font-size: 1.25rem;
+  opacity: 0.9;
+  max-width: 600px;
+  margin: 0 auto 2rem;
+  line-height: 1.6;
+}
+
+/* Modern Navigation */
+.navbar {
+  backdrop-filter: blur(10px);
+  background: rgba(10, 10, 20, 0.85) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all var(--transition-normal);
+}
+
+[data-theme='dark'] .navbar {
+  background: rgba(15, 15, 25, 0.9) !important;
+}
+
+.navbar__link {
+  position: relative;
+  padding: 0.5rem 1rem;
+  transition: all var(--transition-fast);
+}
+
+.navbar__link::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 1rem;
+  right: 1rem;
+  height: 2px;
+  background: var(--gradient-cyber);
+  transform: scaleX(0);
+  transition: transform var(--transition-fast);
+}
+
+.navbar__link:hover::after {
+  transform: scaleX(1);
+}
+
+/* Modern Cards */
+.card {
+  background: var(--gradient-dark-ui);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  transition: all var(--transition-normal);
+  overflow: hidden;
+  position: relative;
+}
+
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: var(--gradient-ai-primary);
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-medium), var(--shadow-glow);
+  border-color: rgba(0, 242, 254, 0.3);
+}
+
+/* Modern Code Blocks */
+.prism-code {
+  font-size: 0.9rem;
+  line-height: 1.6;
+  background: var(--gradient-dark-ui) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  position: relative;
+}
+
+.prism-code::before {
+  content: 'AI';
+  position: absolute;
+  top: 0.75rem;
+  right: 1rem;
+  font-size: 0.75rem;
+  font-family: var(--ifm-font-family-monospace);
+  color: var(--ifm-color-matrix-green);
+  opacity: 0.7;
+}
+
+/* Sidebar Modernization */
+.menu {
+  padding: 1rem 0;
+}
+
+.menu__list-item {
+  margin: 0.25rem 0;
+}
+
+.menu__link {
+  border-radius: 6px;
+  transition: all var(--transition-fast);
+  position: relative;
+  overflow: hidden;
+}
+
+.menu__link::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: var(--gradient-cyber);
+  transform: translateX(-100%);
+  transition: transform var(--transition-fast);
+}
+
+.menu__link:hover::before {
+  transform: translateX(0);
+}
+
+.menu__link--active {
+  background: rgba(0, 242, 254, 0.1);
+  color: var(--ifm-color-neon-cyan);
+}
+
+/* Robotic Diagrams Enhancement */
+.robo-diagram {
+  background: var(--gradient-dark-ui);
+  border: var(--border-circuit);
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin: 1.5rem 0;
+  position: relative;
+  box-shadow: var(--shadow-soft);
+}
+
+.robo-diagram::after {
+  content: '🤖';
+  position: absolute;
+  top: -12px;
+  right: 20px;
+  font-size: 1.5rem;
+  background: var(--gradient-dark-ui);
+  padding: 0 0.5rem;
+}
+
+.robo-diagram:hover {
+  box-shadow: var(--shadow-glow);
+  border-color: rgba(0, 242, 254, 0.6);
+}
+
+/* Modern Buttons */
+.button {
+  border-radius: 8px;
+  font-weight: 600;
+  transition: all var(--transition-fast);
+  position: relative;
+  overflow: hidden;
+}
+
+.button::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 5px;
+  height: 5px;
+  background: rgba(255, 255, 255, 0.5);
+  opacity: 0;
+  border-radius: 100%;
+  transform: scale(1, 1) translate(-50%);
+  transform-origin: 50% 50%;
+}
+
+.button:hover::after {
+  animation: ripple 1s ease-out;
+}
+
+.button--primary {
+  background: var(--gradient-ai-primary);
+  border: none;
+}
+
+.button--primary:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-glow);
+}
+
+/* Table of Contents Modernization */
+.table-of-contents {
+  border-left: 3px solid var(--gradient-cyber);
+  padding-left: 1rem;
+}
+
+.table-of-contents__link {
+  transition: all var(--transition-fast);
+  border-radius: 4px;
+  padding: 0.25rem 0.5rem;
+}
+
+.table-of-contents__link:hover {
+  background: rgba(0, 242, 254, 0.1);
+  color: var(--ifm-color-neon-cyan);
+  transform: translateX(4px);
+}
+
+.table-of-contents__link--active {
+  color: var(--ifm-color-neon-cyan);
+  font-weight: 600;
+  background: rgba(0, 242, 254, 0.15);
+}
+
+/* Focus States */
+button:focus-visible,
+a:focus-visible,
+input:focus-visible {
+  outline: 2px solid var(--ifm-color-neon-cyan);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 4px rgba(0, 242, 254, 0.2);
+  border-radius: 6px;
+}
+
+/* Circuit Board Background Pattern */
+.circuit-bg {
+  background-image: 
+    linear-gradient(rgba(0, 242, 254, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 242, 254, 0.03) 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+
+/* Progress Indicator */
+.progress-bar {
+  height: 3px;
+  background: var(--gradient-ai-primary);
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  transition: width 0.3s ease;
+}
+
+/* AI Chat Bubble Style (for interactive elements) */
+.ai-chat-bubble {
+  background: var(--gradient-dark-ui);
+  border-radius: 18px 18px 18px 4px;
+  padding: 1rem 1.5rem;
+  position: relative;
+  border: 1px solid rgba(0, 242, 254, 0.2);
+  max-width: 600px;
+  margin: 1rem 0;
+}
+
+.ai-chat-bubble::before {
+  content: '🤖';
+  position: absolute;
+  left: -40px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1.5rem;
+}
+
+/* Responsive Design */
+@media (max-width: 996px) {
+  .hero__title {
+    font-size: 2.5rem;
+  }
+  
+  .navbar {
+    padding: 0.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero__title {
+    font-size: 2rem;
+  }
+  
+  .card {
+    margin: 0.5rem;
+  }
+}
+
+/* Animations */
+@keyframes pulse {
+  0% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes ripple {
+  0% {
+    transform: scale(0, 0);
+    opacity: 1;
+  }
+  20% {
+    transform: scale(25, 25);
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: scale(40, 40);
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+/* Loading Animation for AI Content */
+.ai-loading {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border: 2px solid var(--ifm-color-neon-cyan);
+  border-radius: 50%;
+  border-top-color: transparent;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--gradient-dark-ui);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--gradient-cyber);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--ifm-color-neon-cyan);
+}

@@ -1,0 +1,107 @@
+# API Contract: Digital Twin Simulation System
+
+## Overview
+This document defines the API contracts for the digital twin simulation system that integrates Gazebo physics simulation with Unity rendering for humanoid robot simulation.
+
+## Simulation Control API
+
+### GET /simulation/status
+Get the current status of the simulation environment
+
+**Response (200 OK)**:
+```json
+{
+  "status": "running|paused|stopped",
+  "timestamp": "ISO 8601 timestamp",
+  "gazebo_connected": true,
+  "unity_connected": true,
+  "active_robot": "robot_model_name",
+  "simulation_time": "seconds"
+}
+```
+
+### POST /simulation/start
+Start a new simulation with specified parameters
+
+**Request Body**:
+```json
+{
+  "robot_model": "nao|pepper|atlas|custom",
+  "environment": "indoor|outdoor|custom",
+  "physics_config": {
+    "gravity": [x, y, z],
+    "timestep": 0.001
+  }
+}
+```
+
+**Response (201 Created)**:
+```json
+{
+  "simulation_id": "unique_simulation_identifier",
+  "status": "running",
+  "connection_info": {
+    "gazebo_port": 11345,
+    "unity_endpoint": "ws://localhost:8080"
+  }
+}
+```
+
+### POST /simulation/stop
+Stop the active simulation
+
+**Response (200 OK)**:
+```json
+{
+  "status": "stopped",
+  "duration": "seconds"
+}
+```
+
+## Sensor Data API
+
+### GET /sensors/data/{sensor_type}
+Get current sensor data for specified sensor type
+
+Supported sensor types: `lidar`, `depth_camera`, `imu`
+
+**Response (200 OK)**:
+```json
+{
+  "sensor_type": "lidar|depth_camera|imu",
+  "timestamp": "ISO 8601 timestamp",
+  "data": {},
+  "frame_id": "sensor_frame_name"
+}
+```
+
+## Robot Control API
+
+### POST /robot/{robot_id}/control
+Send control commands to the specified robot
+
+**Request Body**:
+```json
+{
+  "joint_commands": [
+    {
+      "joint_name": "joint_name",
+      "position": "radians",
+      "velocity": "rad/s",
+      "effort": "Nm"
+    }
+  ],
+  "base_velocity": {
+    "linear": {"x": 0, "y": 0, "z": 0},
+    "angular": {"x": 0, "y": 0, "z": 0}
+  }
+}
+```
+
+**Response (200 OK)**:
+```json
+{
+  "success": true,
+  "execution_time": "milliseconds"
+}
+```

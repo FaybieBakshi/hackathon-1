@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chatbot Test</title>
+</head>
+<body>
+    <h1>Chatbot Test Page</h1>
+    <p>This page tests if the chatbot widget can connect to the backend server.</p>
+    <div id="chat-test">
+        <h3>Testing API Connection</h3>
+        <p>Backend Status: <span id="backend-status">Checking...</span></p>
+        <p>Chat Endpoint: <span id="chat-status">Not tested yet</span></p>
+        <p>Streaming Endpoint: <span id="stream-status">Not tested yet</span></p>
+    </div>
+
+    <script>
+        // Test the health endpoint
+        async function testHealth() {
+            try {
+                const response = await fetch('http://localhost:8000/health');
+                const data = await response.json();
+                document.getElementById('backend-status').textContent = data.status;
+                document.getElementById('backend-status').style.color = 'green';
+            } catch (error) {
+                document.getElementById('backend-status').textContent = 'Error - Server not accessible';
+                document.getElementById('backend-status').style.color = 'red';
+                console.error('Health check failed:', error);
+            }
+        }
+
+        // Test the chat endpoint
+        async function testChat() {
+            try {
+                const response = await fetch('http://localhost:8000/chat?query=test&session_id=test123', {
+                    method: 'POST'
+                });
+                const data = await response.json();
+                document.getElementById('chat-status').textContent = 'Working';
+                document.getElementById('chat-status').style.color = 'green';
+            } catch (error) {
+                document.getElementById('chat-status').textContent = 'Error - Chat endpoint not working';
+                document.getElementById('chat-status').style.color = 'red';
+                console.error('Chat test failed:', error);
+            }
+        }
+
+        // Test the streaming endpoint
+        async function testStream() {
+            try {
+                const response = await fetch('http://localhost:8000/chat/stream?query=test&session_id=test123');
+                if (response.ok) {
+                    document.getElementById('stream-status').textContent = 'Working';
+                    document.getElementById('stream-status').style.color = 'green';
+                } else {
+                    document.getElementById('stream-status').textContent = 'Error - Stream endpoint not working';
+                    document.getElementById('stream-status').style.color = 'red';
+                }
+            } catch (error) {
+                document.getElementById('stream-status').textContent = 'Error - Stream endpoint not working';
+                document.getElementById('stream-status').style.color = 'red';
+                console.error('Stream test failed:', error);
+            }
+        }
+
+        // Run all tests when page loads
+        window.onload = async function() {
+            await testHealth();
+            await testChat();
+            await testStream();
+        };
+    </script>
+</body>
+</html>

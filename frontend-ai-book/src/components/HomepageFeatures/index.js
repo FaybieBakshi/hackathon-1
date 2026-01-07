@@ -4,32 +4,38 @@ import styles from './styles.module.css';
 
 const FeatureList = [
   {
-    title: 'Easy to Use',
+    title: 'Module 1: The Robotic Nervous System (ROS 2)',
     Svg: require('@site/static/img/undraw_docusaurus_mountain.svg').default,
     description: (
       <>
-        Docusaurus was designed from the ground up to be easily installed and
-        used to get your website up and running quickly.
+       Learn how ROS 2 works as the nervous system of humnoid robots,enabling communication,control and real-time execution.
       </>
     ),
   },
   {
-    title: 'Focus on What Matters',
+    title: 'Module 2: The Digital Twin (Gazebo & Unity)',
     Svg: require('@site/static/img/undraw_docusaurus_tree.svg').default,
     description: (
       <>
-        Docusaurus lets you focus on your docs, and we&apos;ll do the chores. Go
-        ahead and move your docs into the <code>docs</code> directory.
+        In this module, you'll explore the world of digital twins for robotics, focusing on physics simulation and sensor modeling for humanoid robots.
       </>
     ),
   },
   {
-    title: 'Powered by React',
+    title: 'Module 3: The AI-Robot Brain (NVIDIA Isaac)',
+    Svg: require('@site/static/img/undraw_docusaurus_tree.svg').default,
+    description: (
+      <>
+         In this module, you'll explore advanced perception and navigation using NVIDIA Isaac for humanoid robots. 
+      </>
+    ),
+  },
+  {
+    title: 'Module 4: Vision-Language-Action (VLA)',
     Svg: require('@site/static/img/undraw_docusaurus_react.svg').default,
     description: (
       <>
-        Extend or customize your website layout by reusing React. Docusaurus can
-        be extended while reusing the same header and footer.
+       In this module, you'll explore the integration of Vision-Language-Action systems with Large Language Models for voice-controlled humanoid robots. This module builds upon the foundations laid in Modules 1-3 ROS 2 basics, simulation concepts
       </>
     ),
   },

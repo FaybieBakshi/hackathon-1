@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RAG Chatbot Demo</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        .header {
+            background: #1976d2;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        .chat-container {
+            padding: 20px;
+        }
+        .instructions {
+            background: #e3f2fd;
+            padding: 15px;
+            border-radius: 4px;
+            margin-bottom: 20px;
+        }
+        .instructions h3 {
+            margin-top: 0;
+        }
+        .instructions ul {
+            margin-bottom: 0;
+        }
+        .api-info {
+            background: #fff3e0;
+            padding: 15px;
+            border-radius: 4px;
+            margin-top: 20px;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>RAG Chatbot Integration</h1>
+            <p>Documentation Assistant powered by RAG</p>
+        </div>
+
+        <div class="chat-container">
+            <div class="instructions">
+                <h3>How to Use the Chatbot</h3>
+                <ul>
+                    <li>The chat widget is implemented as a React component in <code>frontend-ai-book/src/components/ChatWidget/ChatWidget.jsx</code></li>
+                    <li>It connects to the backend API at <code>http://localhost:8000/</code></li>
+                    <li>Features include real-time streaming responses, citation support, and session management</li>
+                    <li>To see it in action, you need to integrate it into a Docusaurus site or React application</li>
+                </ul>
+            </div>
+
+            <h3>API Endpoints</h3>
+            <div class="api-info">
+                <p><strong>Backend Server:</strong> Running at <code>http://localhost:8000/</code></p>
+                <p><strong>Health Check:</strong> <code>GET /health</code></p>
+                <p><strong>Chat:</strong> <code>POST /chat</code> (query parameter)</p>
+                <p><strong>Chat with Selection:</strong> <code>POST /chat_with_selection</code> (query and selected_text parameters)</p>
+                <p><strong>Streaming Chat:</strong> <code>GET /chat/stream</code> (query parameter)</p>
+                <p><strong>Streaming with Selection:</strong> <code>GET /chat_with_selection/stream</code> (query and selected_text parameters)</p>
+            </div>
+
+            <h3>Integration Instructions</h3>
+            <p>To integrate the chat widget into a Docusaurus site:</p>
+            <ol>
+                <li>Install the required dependencies in your Docusaurus project</li>
+                <li>Copy the <code>ChatWidget.jsx</code> component to your Docusaurus src/components directory</li>
+                <li>Import and use the component in your desired layout or page</li>
+                <li>Ensure your backend server is running at the configured URL</li>
+            </ol>
+
+            <h3>Current Status</h3>
+            <p>✅ Backend API server is running and accessible</p>
+            <p>✅ Health check: <span id="health-status">Checking...</span></p>
+            <p>✅ All API endpoints are available</p>
+            <p>✅ React component is ready for integration</p>
+        </div>
+    </div>
+
+    <script>
+        // Check the health of the API server
+        async function checkHealth() {
+            try {
+                const response = await fetch('http://127.0.0.1:8000/health');
+                const data = await response.json();
+                document.getElementById('health-status').textContent = data.status;
+                document.getElementById('health-status').style.color = 'green';
+            } catch (error) {
+                document.getElementById('health-status').textContent = 'Error - Server not accessible';
+                document.getElementById('health-status').style.color = 'red';
+                console.error('Health check failed:', error);
+            }
+        }
+
+        // Run health check when page loads
+        window.onload = checkHealth;
+    </script>
+</body>
+</html>

@@ -1,0 +1,294 @@
+openapi: 3.0.0
+info:
+  title: RAG Chatbot API with Streaming
+  description: API for the RAG-based chatbot that answers questions from book content with streaming support
+  version: 1.0.0
+servers:
+  - url: http://localhost:8002
+    description: Development server
+
+paths:
+  /chat:
+    post:
+      summary: Process a chat message using the RAG agent
+      description: Sends a user message to the RAG agent and returns an answer based on book content
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChatRequest'
+      responses:
+        '200':
+          description: Successful response from the RAG agent
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChatResponse'
+        '400':
+          description: Bad request - invalid input
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /chat/stream:
+    post:
+      summary: Process a chat message with streaming response
+      description: Sends a user message to the RAG agent and streams the response in real-time
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChatRequest'
+      responses:
+        '200':
+          description: Streaming response from the RAG agent
+          content:
+            text/event-stream:
+              schema:
+                type: object
+                properties:
+                  event:
+                    type: string
+                    description: Type of event (message, citations, done, error)
+                  data:
+                    type: string
+                    description: JSON-encoded event data
+        '400':
+          description: Bad request - invalid input
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /chat_with_selection:
+    post:
+      summary: Process a chat message with selected text context
+      description: Sends a user message with selected text to the RAG agent
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChatWithSelectionRequest'
+      responses:
+        '200':
+          description: Successful response from the RAG agent
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChatResponse'
+        '400':
+          description: Bad request - invalid input
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /chat_with_selection/stream:
+    post:
+      summary: Process a chat message with selected text context and streaming response
+      description: Sends a user message with selected text to the RAG agent and streams the response
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChatWithSelectionRequest'
+      responses:
+        '200':
+          description: Streaming response from the RAG agent
+          content:
+            text/event-stream:
+              schema:
+                type: object
+                properties:
+                  event:
+                    type: string
+                    description: Type of event (message, citations, done, error)
+                  data:
+                    type: string
+                    description: JSON-encoded event data
+        '400':
+          description: Bad request - invalid input
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /health:
+    get:
+      summary: Health check endpoint
+      description: Returns the health status of the API
+      responses:
+        '200':
+          description: API is healthy
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HealthResponse'
+
+components:
+  schemas:
+    ChatRequest:
+      type: object
+      required:
+        - message
+        - session_id
+      properties:
+        message:
+          type: string
+          description: The user's message/query
+          example: "What is the main concept of this book?"
+        session_id:
+          type: string
+          description: Unique session identifier for conversation history
+          example: "session_abc123"
+        options:
+          type: object
+          description: Additional options for the query
+          properties:
+            top_k:
+              type: integer
+              description: Number of top results to retrieve
+              default: 5
+              example: 5
+            temperature:
+              type: number
+              description: Temperature for response generation
+              default: 0.3
+              example: 0.3
+            min_score:
+              type: number
+              description: Minimum confidence score threshold
+              default: 0.3
+              example: 0.3
+
+    ChatWithSelectionRequest:
+      allOf:
+        - $ref: '#/components/schemas/ChatRequest'
+        - type: object
+          required:
+            - selected_text
+          properties:
+            selected_text:
+              type: string
+              description: Text selected by the user for context
+              example: "The core concept of this book is..."
+
+    ChatResponse:
+      type: object
+      required:
+        - answer
+        - citations
+        - confidence_score
+        - session_id
+        - timestamp
+        - status
+      properties:
+        answer:
+          type: string
+          description: The agent's response to the query
+          example: "The main concept of this book is about AI-driven development..."
+        citations:
+          type: array
+          description: List of citations for the answer
+          items:
+            $ref: '#/components/schemas/Citation'
+        confidence_score:
+          type: number
+          description: Confidence score of the response (0.0 to 1.0)
+          minimum: 0.0
+          maximum: 1.0
+          example: 0.85
+        session_id:
+          type: string
+          description: Session identifier
+          example: "session_abc123"
+        timestamp:
+          type: string
+          format: date-time
+          description: Timestamp of the response
+          example: "2026-01-03T05:00:00Z"
+        status:
+          type: string
+          description: Status of the response
+          enum: [success, low_confidence, error]
+          example: "success"
+
+    Citation:
+      type: object
+      required:
+        - id
+        - title
+        - url
+        - content
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the citation
+          example: "1"
+        title:
+          type: string
+          description: Title of the cited source
+          example: "Chapter 1: Introduction"
+        url:
+          type: string
+          format: uri
+          description: URL to the cited source
+          example: "/docs/intro"
+        content:
+          type: string
+          description: Excerpt of the cited content
+          example: "The core concept of this book is..."
+
+    ErrorResponse:
+      type: object
+      required:
+        - error
+        - message
+      properties:
+        error:
+          type: string
+          description: Error code
+          example: "BAD_REQUEST"
+        message:
+          type: string
+          description: Error message
+          example: "Invalid request parameters"
+
+    HealthResponse:
+      type: object
+      required:
+        - status
+      properties:
+        status:
+          type: string
+          description: Health status
+          example: "healthy"

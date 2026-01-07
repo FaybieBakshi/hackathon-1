@@ -4,11 +4,11 @@ sidebar_position: 1
 
 # Tutorial Intro
 
-Let's discover **Learn about Physical AI Robotic Book-5 min**.
+Let's discover **LEARN ABOUT PHYSICAL AI ROBOTIC BOOK-5 MIN**.
 
 ## Getting Started
 
-Get started by **creating a new site**.
+Get started by **Physical AI Robotic Book**.
 
 Or **try Docusaurus immediately** with **[docusaurus.new](https://docusaurus.new)**.
 
